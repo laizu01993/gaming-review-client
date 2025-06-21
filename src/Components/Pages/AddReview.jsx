@@ -1,6 +1,8 @@
+import Swal from "sweetalert2";
+
 const AddReview = () => {
 
-    const handleAddReview = e =>{
+    const handleAddReview = e => {
         e.preventDefault();
 
         const form = e.target;
@@ -12,9 +14,31 @@ const AddReview = () => {
         const year = form.year.value;
         const genre = form.genre.value;
 
-        const newReview = {gameImage, title, description, rating, year, genre}
+        const newReview = { gameImage, title, description, rating, year, genre }
         console.log(newReview);
-        
+
+        // send data to the server
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newReview)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
     }
     return (
         <div className="mx-auto w-11/12 p-6 bg-[#f0f4f8] dark:bg-[#1e293b]">
@@ -73,7 +97,7 @@ const AddReview = () => {
                         required
                     />
                 </div>
-               {/* form publishing year */}
+                {/* form publishing year */}
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-semibold">Publishing Year</span>
@@ -90,10 +114,11 @@ const AddReview = () => {
                 {/* form genre row */}
                 <select name="genre" className="select w-full" required>
                     <option value="">Select Genre</option>
-                    <option value="Action">Action</option>
+                    <option value="Action">Action </option>
                     <option value="Adventure">Adventure</option>
                     <option value="RPG">RPG</option>
-                    <option value="Sports">Sports</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Shooter">Shooter</option>
                 </select>
                 {/* user's email and name */}
                 {/* <input value={user?.email} readOnly className="input w-full bg-gray-100" /> */}
