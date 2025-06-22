@@ -36,8 +36,10 @@ const AddReview = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    form.reset();
                 }
             })
+            
 
     }
     return (
