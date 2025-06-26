@@ -30,18 +30,14 @@ const AddReview = () => {
                 console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
-                        position: "top-end",
                         icon: "success",
                         title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 1500
+                        confirmButtonText: 'Done'
                     });
                     form.reset();
                 }
             })
-            
-
-    }
+        }
     return (
         <div className="mx-auto w-11/12 p-6 bg-[#f0f4f8] dark:bg-[#1e293b]">
             <h2 className="text-2xl font-bold text-center mb-6 ">Add New Game Review</h2>
