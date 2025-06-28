@@ -15,6 +15,7 @@ import Home from './Components/Pages/Home.jsx';
 import AllReviews from './Components/Pages/AllReviews.jsx';
 import Login from './Components/Pages/Login.jsx';
 import Register from './Components/Pages/Register.jsx';
+import ReviewDetails from './Components/Pages/ReviewDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: () => fetch('http://localhost:5000/review')
+      },
+      {
+        path: "/reviewDetails/:id",
+        element: <ReviewDetails></ReviewDetails>,
+        loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
       },
       {
         path: "/allReviews",
