@@ -16,6 +16,7 @@ import AllReviews from './Components/Pages/AllReviews.jsx';
 import Login from './Components/Pages/Login.jsx';
 import Register from './Components/Pages/Register.jsx';
 import ReviewDetails from './Components/Pages/ReviewDetails.jsx';
+import AuthProvider from './providers/AuthProvider.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: "/reviewDetails/:id",
         element: <ReviewDetails></ReviewDetails>,
-        loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
       },
       {
         path: "/allReviews",
@@ -61,6 +62,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
