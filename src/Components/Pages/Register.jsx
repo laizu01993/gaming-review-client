@@ -1,9 +1,11 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const { createUser } = useContext(AuthContext);
 
@@ -27,7 +29,7 @@ const Register = () => {
         }
         if (!/[a-z]/.test(password)) {
             return Swal.fire("Error", "Password must include at least one lowercase letter");
-        }
+        };
 
         createUser(email, password)
             .then(result => {

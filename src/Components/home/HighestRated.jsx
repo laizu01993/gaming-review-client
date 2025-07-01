@@ -4,6 +4,8 @@ import ReviewCard from "./ReviewCard";
 const HighestRated = () =>{
 
     const reviews = useLoaderData();
+    console.log(reviews);
+    
 
     return (
         <div className="my-8">
