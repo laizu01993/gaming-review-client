@@ -1,13 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
 
     const navigate = useNavigate();
 
     const { createUser } = useContext(AuthContext);
+
+    // for toggling password
+    const [showPassword, setShowPassword] = useState(false);
 
     // event handler
     const handleRegister = e => {
@@ -54,23 +58,29 @@ const Register = () => {
                 <div>
                     <label className="block font-normal mb-1">Name</label>
                     <input type="text"
-                        placeholder="Name" name="name" className="input input-bordered w-full" />
+                        placeholder="Name" name="name" className="input input-bordered w-full" required />
                 </div>
                 <div>
                     <label className="block font-normal mb-1">Photo URL</label>
                     <input type="text"
-                        placeholder="Photo URL" name="photo" className="input input-bordered w-full" />
+                        placeholder="Photo URL" name="photo" className="input input-bordered w-full" required />
                 </div>
                 <div>
                     <label className="block font-normal mb-1">Email</label>
                     <input type="email"
-                        placeholder="Email" name="email" className="input input-bordered w-full" />
+                        placeholder="Email" name="email" className="input input-bordered w-full" required />
                 </div>
-                <div>
+                <div className="relative">
                     <label className="block font-normal mb-1">Password</label>
-                    <input type="password"
-                        placeholder="Password" name="password" className="input input-bordered w-full" />
+                    <input type={showPassword ? "text" : "password"}
+                        placeholder="Password" name="password" className="input input-bordered w-full" required />
+                    <button onClick={() => setShowPassword(!showPassword)} className="btn btn-xs absolute right-4 mt-2">
+                        {
+                            showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                        }
+                    </button>
                 </div>
+
 
                 <div className="text-center">
                     <button type="submit" className="btn w-full  font-bold text-blue-500 border-blue-500 text-center">SignUp</button>
