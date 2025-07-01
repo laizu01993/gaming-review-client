@@ -38,15 +38,26 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
-                Swal.fire("Success", "Account created successfully!", "success");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 e.target.reset();
 
                 navigate("/");
 
             })
             .catch(error => {
-                console.log('error', error.message);
-                Swal.fire("Error", error.message, "error");
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Failed to login" + error.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
             });
 
