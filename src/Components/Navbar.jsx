@@ -1,22 +1,46 @@
 
-import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const Navbar = () => {
+
+    const { user, signOutUser } = useContext(AuthContext);
+    console.log(user);
+
+    const navigate = useNavigate();
+
+    const handleSignOut = () =>{
+        signOutUser()
+        .then(() =>{
+            navigate('/')
+        })
+        .catch(error => console.log(error.message));
+
+        
+    }
+    
+
+
     const navLinks = (
         <>
             <li><NavLink className={({ isActive }) =>
                 isActive ? "text-blue-500 font-bold underline" : "font-semibold"
             } to="/">Home</NavLink></li>
+
             <li><NavLink className={({ isActive }) =>
                 isActive ? "text-blue-500 font-bold underline" : "font-semibold"
             } to="/reviews">All Reviews</NavLink></li>
+
             <li><NavLink className={({ isActive }) =>
                 isActive ? "text-blue-500 font-bold underline" : "font-semibold"
             } to="/addReview">Add Review</NavLink></li>
+
             <li><NavLink className={({ isActive }) =>
                 isActive ? "text-blue-500 font-bold underline" : "font-semibold"
             } to="/myReviews">My Reviews</NavLink></li>
+
             <li><NavLink className={({ isActive }) =>
                 isActive ? "text-blue-500 font-bold underline" : "font-semibold"
             } to="/watchlist">Watchlist</NavLink></li>
@@ -61,12 +85,22 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">{navLinks}</ul>
             </div>
 
-            {/* Right Side - Login/Register Buttons for now */}
+            {/* Right Side - Login/Register Buttons*/}
             <div className="navbar-end space-x-3">
-                <Link to="/login" className="btn btn-sm bg-blue-400 text-white hover:bg-blue-500">Login</Link>
-                <Link to="/register" className="btn btn-sm btn-outline border-blue-400 hover:bg-blue-100">Register</Link>
-                {/* Placeholder user icon if you want a consistent layout */}
-                {/* <FaUserCircle className="text-2xl hidden lg:block" /> */}
+                {
+                    user ? <>
+                        <div className="tooltip tooltip-bottom" data-tip={user.displayName || "User"}>
+                            <img
+                                src={user.photoURL || "/default-avatar.png"}
+                                
+                                className="w-10 h-10 rounded-full border-2 border-primary"
+                            />
+                        </div>
+                        <button onClick={handleSignOut} className="btn btn-sm bg-blue-400 text-white hover:bg-blue-500">Log out</button></> : <>
+                        <Link to="/login" className="btn btn-sm bg-blue-400 text-white hover:bg-blue-500">Login</Link>
+                        <Link to="/register" className="btn btn-sm btn-outline border-blue-400 hover:bg-blue-100">Register</Link>
+                    </>
+                }
             </div>
         </div>
     );

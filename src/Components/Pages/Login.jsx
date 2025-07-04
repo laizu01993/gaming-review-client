@@ -3,15 +3,17 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
 
     const navigate = useNavigate();
 
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser, user } = useContext(AuthContext);
 
-    // for toggle password
-    const [showPassword, setShowPassword] = useState(false);
+    console.log(user);
+
+
 
     // event handler
     const handleLogin = e => {
@@ -25,7 +27,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 // console.log(result.user);
-                
+
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -47,8 +49,8 @@ const Login = () => {
                 });
 
             });
-        };
-        
+    };
+
 
     return (
         <div className="w-11/12 mx-auto max-w-md bg-blue-50 shadow-md p-8 rounded mt-10">
@@ -61,13 +63,9 @@ const Login = () => {
                 </div>
                 <div className="relative">
                     <label className="block font-normal mb-1">Password</label>
-                    <input type={showPassword ? "text" : "password"}
+                    <input type="password"
                         placeholder="Password" name="password" className="input input-bordered w-full" required />
-                    <button onClick={() => setShowPassword(!showPassword)} className="btn btn-xs absolute right-4 mt-2">
-                        {
-                            showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
-                        }
-                    </button>
+
                 </div>
 
                 <div className="text-center">
@@ -79,7 +77,7 @@ const Login = () => {
 
                 <div className="divider font-bold">OR</div>
                 <div className="text-center">
-                    <button className="btn btn-md font-bold text-blue-500 border-blue-500 text-center">Google</button>
+                    <SocialLogin></SocialLogin>
                 </div>
             </form>
         </div>

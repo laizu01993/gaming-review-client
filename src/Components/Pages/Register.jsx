@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../firebase/firebase.config";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Register = () => {
 
@@ -48,6 +51,15 @@ const Register = () => {
                 e.target.reset();
 
                 navigate("/");
+
+                // update profile
+                const profile = {
+                    displayName: name,
+                    photoURL: photo
+                }
+                updateProfile(auth.currentUser, profile)
+                .then()
+                .catch(error)
 
             })
             .catch(error => {
@@ -102,7 +114,7 @@ const Register = () => {
 
                 <div className="divider font-bold">OR</div>
                 <div className="text-center">
-                    <button className="btn btn-md font-bold text-blue-500 border-blue-500 text-center">Google</button>
+                    <SocialLogin></SocialLogin>
                 </div>
             </form>
         </div>
