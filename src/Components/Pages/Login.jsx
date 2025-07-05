@@ -75,11 +75,12 @@ const Login = () => {
                 <p className="font-medium text-center">Don't Have An Account? Please <Link className="text-red-500" to="/register">Sign Up</Link></p>
 
 
-                <div className="divider font-bold">OR</div>
-                <div className="text-center">
-                    <SocialLogin></SocialLogin>
-                </div>
+
             </form>
+            <div className="divider font-bold">OR</div>
+            <div className="text-center">
+                <SocialLogin></SocialLogin>
+            </div>
         </div>
     );
 };

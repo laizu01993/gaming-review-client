@@ -17,6 +17,8 @@ import Login from './Components/Pages/Login.jsx';
 import Register from './Components/Pages/Register.jsx';
 import ReviewDetails from './Components/Pages/ReviewDetails.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
+import PrivateRoute from './routes/PrivateRoute.jsx';
+import NotFound from './Components/Pages/NotFound.jsx';
 
 
 const router = createBrowserRouter([
@@ -49,11 +51,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/addReview",
-        element: <AddReview></AddReview>
+        element: <PrivateRoute><AddReview></AddReview></PrivateRoute>
       },
       {
         path: "/updateReview",
         element: <UpdateReview></UpdateReview>
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>
       }
     ]
   },
