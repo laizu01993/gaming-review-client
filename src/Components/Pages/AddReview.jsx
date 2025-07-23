@@ -1,6 +1,13 @@
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddReview = () => {
+
+    const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleAddReview = e => {
         e.preventDefault();
@@ -13,8 +20,9 @@ const AddReview = () => {
         const rating = form.rating.value;
         const year = form.year.value;
         const genre = form.genre.value;
+        
 
-        const newReview = { gameImage, title, description, rating, year, genre }
+        const newReview = { gameImage, title, description, rating, year, genre, user_email: user.email, user_name: user.displayName }
         console.log(newReview);
 
         // send data to the server
@@ -32,12 +40,14 @@ const AddReview = () => {
                     Swal.fire({
                         icon: "success",
                         title: "Your work has been saved",
-                        confirmButtonText: 'Done'
+                        confirmButton: false,
+                        timer:1500
                     });
                     form.reset();
+                    navigate('/myReviews')
                 }
             })
-        }
+    }
     return (
         <div className="mx-auto w-11/12 p-6 bg-[#f0f4f8] dark:bg-[#1e293b]">
             <h2 className="text-2xl font-bold text-center mb-6 ">Add New Game Review</h2>
@@ -119,8 +129,18 @@ const AddReview = () => {
                     <option value="Shooter">Shooter</option>
                 </select>
                 {/* user's email and name */}
-                {/* <input value={user?.email} readOnly className="input w-full bg-gray-100" /> */}
-                {/* <input value={user?.displayName} readOnly className="input w-full bg-gray-100" /> */}
+                <div>
+                    <label className="label">
+                        <span className="label-text font-semibold">User Name</span>
+                    </label>
+                    <input type="text" name="userName" defaultValue={user?.displayName} readOnly className="input input-bordered w-full bg-gray-100" />
+                </div>
+                <div>
+                    <label className="label">
+                    <span className="label-text font-semibold">User Email</span>
+                    </label>
+                    <input type="email" name="userEmail" defaultValue={user?.email} readOnly className="input input-bordered w-full bg-gray-100" />
+                </div>
 
                 {/* button */}
                 <input type="submit" value="Add Review" className="btn btn-block bg-gray-300" />

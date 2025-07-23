@@ -17,7 +17,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     // event handler
-    const handleRegister = e => {
+    const handleRegister = (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -25,7 +25,6 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photo, email, password);
 
         // password validation
         if (password.length < 6) {
@@ -36,44 +35,55 @@ const Register = () => {
         }
         if (!/[a-z]/.test(password)) {
             return Swal.fire("Error", "Password must include at least one lowercase letter");
-        };
+        }
 
         createUser(email, password)
-            .then(result => {
-                console.log(result.user);
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Login successful",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                e.target.reset();
-
-                navigate("/");
-
+            .then((result) => {
                 // update profile
-                const profile = {
+                return updateProfile(auth.currentUser, {
                     displayName: name,
-                    photoURL: photo
-                }
-                updateProfile(auth.currentUser, profile)
-                .then()
-                .catch(error)
-
+                    photoURL: photo,
+                });
             })
-            .catch(error => {
+            .then(() => {
+                // save user info to MongoDB
+                const createdAt = result?.user?.metadata?.creationTime;
+
+                const newUser = { name, email, createdAt };
+                return fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(newUser),
+                });
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Registration successful",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    form.reset();
+                    navigate("/");
+                }
+            })
+            .catch((error) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: "Failed to login" + error.message,
+                    title: "Failed to register: " + error.message,
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
                 });
-
             });
-
     };
+
+
     return (
         <div className="w-11/12 mx-auto max-w-md bg-blue-50 shadow-md p-8 rounded mt-10">
             <h2 className="text-4xl font-bold text-center">SignUp Now!</h2>
