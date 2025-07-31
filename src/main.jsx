@@ -20,6 +20,7 @@ import AuthProvider from './providers/AuthProvider.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
 import NotFound from './Components/Pages/NotFound.jsx';
 import MyReviews from './Components/Pages/MyReviews.jsx';
+import Watchlist from './Components/Pages/Watchlist.jsx';
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyReviews></MyReviews> </PrivateRoute>
       },
       {
+        path: "/updateReview/:id",
+        element: <PrivateRoute><UpdateReview></UpdateReview> </PrivateRoute>,
+        loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+      },
+      {
+        path: "/watchlist",
+        element: <PrivateRoute><Watchlist></Watchlist></PrivateRoute>
+      },
+      {
         path: "/login",
         element: <Login></Login>
       },
@@ -59,10 +69,7 @@ const router = createBrowserRouter([
         path: "/addReview",
         element: <PrivateRoute><AddReview></AddReview></PrivateRoute>
       },
-      {
-        path: "/updateReview",
-        element: <UpdateReview></UpdateReview>
-      }
+
     ]
   },
   {

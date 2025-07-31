@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+
 
 const AddReview = () => {
 
     const { user } = useContext(AuthContext);
 
-    const navigate = useNavigate();
+
 
     const handleAddReview = e => {
         e.preventDefault();
@@ -39,12 +39,12 @@ const AddReview = () => {
                 if (data.insertedId) {
                     Swal.fire({
                         icon: "success",
-                        title: "Your work has been saved",
+                        title: "Review added successfully",
                         confirmButton: false,
                         timer:1500
                     });
                     form.reset();
-                    navigate('/myReviews')
+                    
                 }
             })
     }
