@@ -1,13 +1,17 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
 
+    const location = useLocation();
+
     const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || "/";
 
     const { signInUser, user } = useContext(AuthContext);
 
@@ -36,7 +40,7 @@ const Login = () => {
                     timer: 1500
                 });
                 e.target.reset();
-                navigate('/');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 // console.log('ERROR', error.message);

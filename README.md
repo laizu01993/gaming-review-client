@@ -1,12 +1,72 @@
-# React + Vite
+# 🎮 Gaming Review
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [https://your-frontend-deploy-link.surge.sh](https://your-frontend-deploy-link.surge.sh)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Purpose
 
-## Expanding the ESLint configuration
+Gaming Review is a web application for game enthusiasts to share, explore, and manage game reviews.  
+Users can add reviews, update or delete their own reviews, and maintain a personal watchlist.  
+The app uses Firebase authentication for secure login and private route protection.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Key Features
+
+- 🔐 **Authentication**
+  - Email/Password Sign Up and Login
+  - Google Sign-In
+  - Protected (private) routes for Add Review, My Reviews, and Watchlist
+
+- 📝 **Game Reviews**
+  - Add new game reviews with images, rating, genre, and description
+  - Update and delete your own reviews
+  - Explore detailed reviews of each game
+
+- ⭐ **Highest Rated Games**
+  - Dedicated section on home page showing top-rated games
+
+- 📃 **Watchlist**
+  - Add reviews to personal watchlist
+  - Manage watchlist (view-only for now)
+
+- ❌ **Error Handling**
+  - Custom 404 page for invalid routes
+
+- 💻 **Responsive Design**
+  - Fully responsive for mobile, tablet, and desktop
+  - Clean and modern UI
+
+---
+
+## ⚙️ Tech Stack
+
+- **React**
+- **Vite**
+- **Tailwind CSS**
+- **DaisyUI**
+- **Firebase Authentication**
+- **React Router DOM**
+- **SweetAlert2**
+- **Surge (for deployment)**
+
+---
+
+## 📦 NPM Packages Used
+
+- `react-router-dom`
+- `firebase`
+- `sweetalert2`
+- `tailwindcss`
+- `daisyui`
+
+---
+
+## 🚀 Deployment
+
+This app is deployed using [Surge](https://surge.sh). To deploy:
+```bash
+npm run build
+cd dist
+surge
