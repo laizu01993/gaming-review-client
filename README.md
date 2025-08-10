@@ -49,7 +49,7 @@ The app uses Firebase authentication for secure login and private route protecti
 - **Firebase Authentication**
 - **React Router DOM**
 - **SweetAlert2**
-- **Surge (for deployment)**
+- **Vercel (for deployment)**
 
 ---
 
@@ -65,8 +65,11 @@ The app uses Firebase authentication for secure login and private route protecti
 
 ## 🚀 Deployment
 
-This app is deployed using [Surge](https://surge.sh). To deploy:
+This app is deployed using Vercel. To deploy:
 ```bash
+# Build the project
 npm run build
-cd dist
-surge
+
+# Deploy to Vercel (Production)
+vercel --prod
+
