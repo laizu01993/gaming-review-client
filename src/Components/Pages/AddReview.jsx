@@ -23,10 +23,10 @@ const AddReview = () => {
         
 
         const newReview = { gameImage, title, description, rating, year, genre, user_email: user.email, user_name: user.displayName }
-        console.log(newReview);
+        // console.log(newReview);
 
         // send data to the server
-        fetch('http://localhost:5000/review', {
+        fetch('https://gaming-review-server.vercel.app/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +35,7 @@ const AddReview = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         icon: "success",

@@ -50,7 +50,7 @@ const Register = () => {
                 const createdAt = result?.user?.metadata?.creationTime;
 
                 const newUser = { name, email, createdAt };
-                return fetch("http://localhost:5000/users", {
+                return fetch("https://gaming-review-server.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",

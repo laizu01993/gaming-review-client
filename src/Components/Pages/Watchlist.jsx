@@ -8,7 +8,7 @@ const Watchlist = () => {
     const [watchlist, setWatchlist] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/watchlist?email=${user.email}`)
+        fetch(`https://gaming-review-server.vercel.app/watchlist?email=${user.email}`)
             .then(res => res.json())
             .then((data) => setWatchlist(data));
     }, [user.email]);

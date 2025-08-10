@@ -4,7 +4,7 @@ import AllReviewCard from "./AllReviewCard";
 const AllReviews = () => {
 
     const allReviews = useLoaderData();
-    console.log(allReviews);
+    // console.log(allReviews);
     
 
     return (

@@ -9,13 +9,13 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myReviews?email=${user.email}`)
+        fetch(`https://gaming-review-server.vercel.app/myReviews?email=${user.email}`)
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [user.email]);
 
     const handleDelete = _id => {
-        console.log(_id);
+        // console.log(_id);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -27,12 +27,12 @@ const MyReviews = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/review/${_id}`, {
+                fetch(`https://gaming-review-server.vercel.app/review/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",

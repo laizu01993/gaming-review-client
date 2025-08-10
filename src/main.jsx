@@ -31,18 +31,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/topReview')
+        loader: () => fetch('https://gaming-review-server.vercel.app/topReview')
       },
       {
         path: "/reviewDetails/:id",
         element: <ReviewDetails></ReviewDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+        loader: ({ params }) => fetch(`https://gaming-review-server.vercel.app/review/${params.id}`)
 
       },
       {
         path: "/allReviews",
         element: <AllReviews></AllReviews>,
-        loader: () => fetch('http://localhost:5000/review')
+        loader: () => fetch('https://gaming-review-server.vercel.app/review')
       },
       {
         path: "/myReviews",
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       {
         path: "/updateReview/:id",
         element: <PrivateRoute><UpdateReview></UpdateReview> </PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+        loader: ({ params }) => fetch(`https://gaming-review-server.vercel.app/review/${params.id}`)
       },
       {
         path: "/watchlist",

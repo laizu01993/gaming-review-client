@@ -7,7 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const Navbar = () => {
 
     const { user, signOutUser } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
 
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ const Navbar = () => {
         .then(() =>{
             navigate('/')
         })
-        .catch(error => console.log(error.message));
+        // .catch(error => console.log(error.message));
 
         
     }

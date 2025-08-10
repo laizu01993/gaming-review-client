@@ -8,7 +8,7 @@ const ReviewDetails = () => {
     const { user } = useContext(AuthContext);
 
     const review = useLoaderData();
-    console.log(review);
+    // console.log(review);
 
     const handleAddToWatchlist = () => {
         const watchData = {
@@ -22,7 +22,7 @@ const ReviewDetails = () => {
             genre: review.genre,
         };
 
-        fetch('http://localhost:5000/watchlist', {
+        fetch('https://gaming-review-server.vercel.app/watchlist', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(watchData),

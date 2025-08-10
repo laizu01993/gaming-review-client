@@ -1,6 +1,6 @@
 # 🎮 Gaming Review
 
-**Live Site:** [https://your-frontend-deploy-link.surge.sh](https://your-frontend-deploy-link.surge.sh)
+**Live Site:** [https://gaming-review-client.vercel.app/](https://gaming-review-client.vercel.app/)
 
 ---
 

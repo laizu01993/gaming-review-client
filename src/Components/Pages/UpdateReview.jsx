@@ -24,10 +24,10 @@ const UpdateReview = () => {
 
 
         const updateReview = { gameImage, title, description, rating, year, genre, user_email: user.email, user_name: user.displayName }
-        console.log(updateReview);
+        // console.log(updateReview);
 
         // send data to the server
-        fetch(`http://localhost:5000/review/${review._id}`, {
+        fetch(`https://gaming-review-server.vercel.app/review/${review._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -36,7 +36,7 @@ const UpdateReview = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         icon: "success",
