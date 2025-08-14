@@ -31,7 +31,22 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('https://gaming-review-server.vercel.app/topReview')
+        // loader: () => fetch('https://gaming-review-server.vercel.app/topReview')
+
+        loader: async () => {
+          try {
+            const res = await fetch('https://gaming-review-server.vercel.app/topReview');
+            if (!res.ok) {
+              console.error("Failed to fetch top reviews:", res.statusText);
+              return [];
+            }
+            const data = await res.json();
+            return Array.isArray(data) ? data : [];
+          } catch (error) {
+            console.error("Error loading top reviews:", error);
+            return [];
+          }
+        }
       },
       {
         path: "/reviewDetails/:id",
